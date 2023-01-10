@@ -89,11 +89,22 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-function getPasswordOptions() {
+// function getPasswordOptions() {
+//   var lowerCase = confirm("Do you want lower case letters?");
+//   var upperCase = confirm("Do you want upper case letters?");
+//   var numeric = confirm("Do you want numbers?");
+//   var specialChar = confirm("Do you want special Charaters?");
+//   if(lowerCase && upperCase && numeric && specialChar == false){
+//     confirm("Please select at least one character set.")
+//     return;
+//   }
+//   else{
+//     generatePassword;
+//   }
 
-}
+// }
 
-function passLength(){
+function getPasswordOptions(){
   var passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
   if(passLength < 10){
     confirm("Password length must be between 10 and 64 characters.")
@@ -106,7 +117,17 @@ function passLength(){
     return;
   }
   else{
-    getPasswordOptions;
+    var lowerCase = confirm("Do you want lower case letters?");
+    var upperCase = confirm("Do you want upper case letters?");
+    var numeric = confirm("Do you want numbers?");
+    var specialChar = confirm("Do you want special Charaters?");
+    if(lowerCase && upperCase && numeric && specialChar == false){
+      confirm("Please select at least one character set.")
+      return;
+    }
+    else{
+      generatePassword;
+    }
   }
 }
 
@@ -133,4 +154,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', passLength);
+generateBtn.addEventListener('click', getPasswordOptions);
