@@ -121,12 +121,13 @@ function getPasswordOptions(){
     var upperCase = confirm("Do you want upper case letters?");
     var numeric = confirm("Do you want numbers?");
     var specialChar = confirm("Do you want special Charaters?");
-    if(lowerCase && upperCase && numeric && specialChar == false){
-      confirm("Please select at least one character set.")
+
+    if((lowerCase && upperCase && numeric && specialChar) === false){
+      confirm("Please select at least one character type.")
       return;
     }
     else{
-      generatePassword;
+      console.log("null");
     }
   }
 }
