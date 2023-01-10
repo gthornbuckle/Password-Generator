@@ -97,14 +97,17 @@ function getPasswordOptions(){
   passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
   if(isNaN(passLength)){ //Checks that the user input contains a number
     confirm("Please input a number.");
+    validPass = false;
     return;
   }
   else if(passLength < 10){
     confirm("Password length must be between 10 and 64 characters.");
+    validPass = false;
     return;
   }
   else if(passLength > 64){
     confirm("Password length must be between 10 and 64 characters.");
+    validPass = false;
     return;
   }
   else{
