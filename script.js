@@ -91,9 +91,10 @@ var upperCasedCharacters = [
 var generatedPassword = "password";
 var passLength = 0;
 var userSelection = [];
+var validPass = false;
 
 function getPasswordOptions(){
-  var passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
+  passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
   if(passLength < 10){
     confirm("Password length must be between 10 and 64 characters.");
     return;
@@ -106,16 +107,17 @@ function getPasswordOptions(){
     var lowerCase = confirm("Do you want lower case letters?");
     var upperCase = confirm("Do you want upper case letters?");
     var numeric = confirm("Do you want numbers?");
-    var specialChar = confirm("Do you want special Charaters?");
+    var specialChar = confirm("Do you want special Characters?");
 
-    var userSelection = [lowerCase, upperCase, numeric, specialChar]; //User choices are stored in array
+    userSelection = [lowerCase, upperCase, numeric, specialChar]; //User choices are stored in array
 
-    if(userSelection.every(v => v === false)){ //If all elements of the array are false, the password is invalid
+    if(userSelection.every(i => i === false)){ //If all elements of the array are false, the password is invalid
       confirm("Please select at least one character type.");
       return;
     }
     else{
-      generatedPassword = generatePassword;
+      console.log("Valid password parameters.");
+      validPass = true;
     }
   }
 }
@@ -125,10 +127,39 @@ function getRandom(arr) {
   return arr[Math.floor(Math.random()*arr.length)];
 }
 
-console.log(getRandom());
+function charSetSelector(){
+  if(userSelection[i] === true){
+    console.log(getRandom(userSelection[i]));
+  }
+}
+
 // Function to generate password with user input
 function generatePassword() {
-
+  getPasswordOptions(); //Calls function to define user inputted parameters.
+  if(validPass === true){ //Only generates a password if the user input is valid.
+    var i = 0;
+    while (i < passLength){ //While loop runs until entire password is generated.
+      if(userSelection[0] === true){
+        console.log(getRandom(lowerCasedCharacters));
+        i++;
+      }
+      if(userSelection[1] === true){
+        console.log(getRandom(upperCasedCharacters));
+        i++;
+      }
+      if(userSelection[2] === true){
+        console.log(getRandom(numericCharacters));
+        i++;
+      }
+      if(userSelection[3] === true){
+        console.log(getRandom(specialCharacters));
+        i++;
+      }
+    }
+  }
+  else{
+    return;
+  }
 }
 
 // Get references to the #generate element
@@ -144,4 +175,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', getPasswordOptions);
+generateBtn.addEventListener('click', writePassword);
