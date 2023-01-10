@@ -95,8 +95,8 @@ var validPass = false;
 
 function getPasswordOptions(){
   passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
-  if(passLength === null){
-    confirm("Please input a value.");
+  if(isNaN(passLength)){ //Checks that the user input contains a number
+    confirm("Please input a number.");
     return;
   }
   else if(passLength < 10){
