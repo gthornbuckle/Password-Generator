@@ -88,14 +88,18 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var generatedPassword = "password";
+var password = "Failed to generate password";
 var passLength = 0;
 var userSelection = [];
 var validPass = false;
 
 function getPasswordOptions(){
   passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
-  if(passLength < 10){
+  if(passLength === null){
+    confirm("Please input a value.");
+    return;
+  }
+  else if(passLength < 10){
     confirm("Password length must be between 10 and 64 characters.");
     return;
   }
@@ -138,28 +142,37 @@ function generatePassword() {
   getPasswordOptions(); //Calls function to define user inputted parameters.
   if(validPass === true){ //Only generates a password if the user input is valid.
     var i = 0;
+    tempPass = []; //Generated password is temporarily stored in an array.
     while (i < passLength){ //While loop runs until entire password is generated.
-      if(userSelection[0] === true){
-        console.log(getRandom(lowerCasedCharacters));
+      if(userSelection[0] === true){ //If the user selected the character set, a random character from that set is pushed into the temporary password array.
+        tempPass.push(getRandom(lowerCasedCharacters));
         i++;
       }
       if(userSelection[1] === true){
-        console.log(getRandom(upperCasedCharacters));
+       tempPass.push(getRandom(upperCasedCharacters));
         i++;
       }
       if(userSelection[2] === true){
-        console.log(getRandom(numericCharacters));
+        tempPass.push(getRandom(numericCharacters));
         i++;
       }
       if(userSelection[3] === true){
-        console.log(getRandom(specialCharacters));
+        tempPass.push(getRandom(specialCharacters));
         i++;
       }
     }
+    password = tempPass.join(""); //Once the entire password is generated, the temp password array is converted to a string and defines the password to be outputted.
   }
   else{
     return;
   }
+}
+
+function reset(){ //Resets variables to default to ensure multiple passwords can be generated without refreshing the page.
+  var password = "Failed to generate password";
+  var passLength = 0;
+  var userSelection = [];
+  var validPass = false;
 }
 
 // Get references to the #generate element
@@ -168,10 +181,11 @@ var generateBtn = document.querySelector('#generate');
 // Write password to the #password input
 
 function writePassword() {
-  var password = generatePassword();
+  generatePassword();
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
+  reset();
 }
 
 // Add event listener to generate button
