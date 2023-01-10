@@ -107,12 +107,12 @@ var upperCasedCharacters = [
 function getPasswordOptions(){
   var passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
   if(passLength < 10){
-    confirm("Password length must be between 10 and 64 characters.")
+    confirm("Password length must be between 10 and 64 characters.");
     passLength = 0;
     return;
   }
   else if(passLength > 64){
-    confirm("Password length must be between 10 and 64 characters.")
+    confirm("Password length must be between 10 and 64 characters.");
     passLength = 0;
     return;
   }
@@ -122,12 +122,14 @@ function getPasswordOptions(){
     var numeric = confirm("Do you want numbers?");
     var specialChar = confirm("Do you want special Charaters?");
 
-    if((lowerCase && upperCase && numeric && specialChar) === false){
-      confirm("Please select at least one character type.")
+    var userSelection = [lowerCase, upperCase, numeric, specialChar]; //User choices are stored in array
+
+    if(userSelection.every(v => v === false)){ //If all elements of the array are false, the password is invalid
+      confirm("Please select at least one character type.");
       return;
     }
     else{
-      console.log("null");
+      console.log("Valid password");
     }
   }
 }
