@@ -88,32 +88,18 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
-// function getPasswordOptions() {
-//   var lowerCase = confirm("Do you want lower case letters?");
-//   var upperCase = confirm("Do you want upper case letters?");
-//   var numeric = confirm("Do you want numbers?");
-//   var specialChar = confirm("Do you want special Charaters?");
-//   if(lowerCase && upperCase && numeric && specialChar == false){
-//     confirm("Please select at least one character set.")
-//     return;
-//   }
-//   else{
-//     generatePassword;
-//   }
-
-// }
+var generatedPassword = "password";
+var passLength = 0;
+var userSelection = [];
 
 function getPasswordOptions(){
   var passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
   if(passLength < 10){
     confirm("Password length must be between 10 and 64 characters.");
-    passLength = 0;
     return;
   }
   else if(passLength > 64){
     confirm("Password length must be between 10 and 64 characters.");
-    passLength = 0;
     return;
   }
   else{
@@ -129,16 +115,17 @@ function getPasswordOptions(){
       return;
     }
     else{
-      console.log("Valid password");
+      generatedPassword = generatePassword;
     }
   }
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
+console.log(getRandom());
 // Function to generate password with user input
 function generatePassword() {
 
