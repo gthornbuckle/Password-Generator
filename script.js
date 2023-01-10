@@ -93,6 +93,23 @@ function getPasswordOptions() {
 
 }
 
+function passLength(){
+  var passLength = parseInt(prompt("Please specify password length:")); //Takes user inputted password length and converts to integer.
+  if(passLength < 10){
+    confirm("Password length must be between 10 and 64 characters.")
+    passLength = 0;
+    return;
+  }
+  else if(passLength > 64){
+    confirm("Password length must be between 10 and 64 characters.")
+    passLength = 0;
+    return;
+  }
+  else{
+    getPasswordOptions;
+  }
+}
+
 // Function for getting a random element from an array
 function getRandom(arr) {
 
@@ -107,6 +124,7 @@ function generatePassword() {
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
@@ -115,4 +133,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+generateBtn.addEventListener('click', passLength);
